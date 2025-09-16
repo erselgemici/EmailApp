@@ -1,0 +1,41 @@
+@model SendMessageViewModel
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Views/MainLayout/Index.cshtml";
+}
+
+<div class="col-md-9">
+    <form method="post">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">Yeni Mail Gönder</h3>
+            </div>
+         
+            <div class="card-body">
+                <div class="form-group">
+                    <input class="form-control" asp-for="ReceiverEmail" placeholder="Kime:" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" asp-for="Subject" placeholder="Konu:" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" asp-for="Body" style="height: 300px" required>
+                           
+                    </textarea>
+                </div>
+              
+            </div>
+          
+            <div class="card-footer">
+                <div class="float-right">
+                    <button type="submit" name="submitType" value="Draft" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
+                    <button type="submit" type="submit" name="submitType" value="Send" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder</button>
+                </div>
+                <button type="submit" type="submit" name="submitType" value="Discard" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
+            </div>
+          
+        </div>
+    </form>
+   
+</div>
+

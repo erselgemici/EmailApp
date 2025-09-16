@@ -1,0 +1,64 @@
+@model List<Message>
+@{
+    ViewData["Title"] = "Taslaklar";
+    Layout = "~/Views/MainLayout/Index.cshtml";
+}
+
+<div class="col-md-9">
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3 class="card-title">Taslaklar</h3>
+        </div>
+
+        <form asp-action="DeleteSelected" method="post">
+            <div class="card-body p-0">
+                <div class="mailbox-controls">
+                    <!-- Tümünü seç -->
+                    <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                        <i class="far fa-square"></i>
+                    </button>
+                    <!-- Sil -->
+                    <button type="submit" class="btn btn-default btn-sm">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+
+                <div class="table-responsive mailbox-messages">
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" name="selectedIds" value="@item.MessageId" id="check_@item.MessageId">
+                                            <label for="check_@item.MessageId"></label>
+                                        </div>
+                                    </td>
+                                    <td class="mailbox-name">
+                                        @if (item.Receiver != null)
+                                        {
+                                            <span>@item.Receiver.FirstName @item.Receiver.LastName (@item.Receiver.Email)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Alıcı eklenmedi</span>
+                                        }
+                                    </td>
+                                    <td class="mailbox-subject">
+                                        <b>@item.Subject</b>
+                                        
+                                    </td>
+                                    <td class="mailbox-date">@item.SendDate.ToShortDateString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

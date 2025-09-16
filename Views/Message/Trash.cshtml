@@ -1,0 +1,67 @@
+@model List<Message>
+@{
+    ViewData["Title"] = "Çöp Kutusu";
+    Layout = "~/Views/MainLayout/Index.cshtml";
+}
+
+<div class="col-md-9">
+    <div class="card card-danger card-outline">
+        <div class="card-header">
+            <h3 class="card-title">Çöp Kutusu</h3>
+        </div>
+
+        <!-- Kalıcı silme formu -->
+        <form id="trashForm" asp-action="DeleteForever" method="post">
+            <div class="card-body p-0">
+                <div class="mailbox-controls">
+                    <!-- Tümünü seç -->
+                    <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                        <i class="far fa-square"></i>
+                    </button>
+
+                    <!-- Kalıcı Sil Butonu -->
+                    <button type="button" class="btn btn-danger btn-sm" id="deleteForeverBtn">
+                        <i class="fas fa-times"></i> Kalıcı Sil
+                    </button>
+                </div>
+
+                <div class="table-responsive mailbox-messages">
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="selectedIds" value="@item.MessageId" />
+                                    </td>
+                                    <td>@item.Receiver?.FirstName @item.Receiver?.LastName</td>
+                                    <td>@item.Subject</td>
+                                    <td>@item.SendDate.ToShortDateString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById("deleteForeverBtn").addEventListener("click", function () {
+        Swal.fire({
+            title: "Emin misiniz?",
+            text: "Seçilen mesajlar kalıcı olarak silinecek ve geri getirilemeyecek!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Evet, sil",
+            cancelButtonText: "Vazgeç"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("trashForm").submit();
+            }
+        });
+    });
+</script>
+

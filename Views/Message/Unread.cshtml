@@ -1,0 +1,43 @@
+@model List<Message>
+@{
+    ViewData["Title"] = "Okunmamışlar";
+    Layout = "~/Views/MainLayout/Index.cshtml";
+}
+
+<div class="col-md-9">
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3 class="card-title">Okunmamış Mesajlar</h3>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive mailbox-messages">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="table-secondary">
+                                <td class="mailbox-star">
+                                    <form asp-action="ToggleImportant" method="post">
+                                        <input type="hidden" name="id" value="@item.MessageId" />
+                                        <button type="submit" class="btn btn-link p-0">
+                                            @(item.IsImportant
+                                                                                    ? Html.Raw("<i class='fas fa-star text-warning'></i>")
+                                                                                    : Html.Raw("<i class='far fa-star'></i>"))
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="mailbox-name">
+                                <a href="/Message/MessageDetail/@item.MessageId">
+                                    @item.Sender?.FirstName @item.Sender?.LastName
+                                </a>
+                            </td>
+                            <td class="mailbox-subject"><b>@item.Subject</b></td>
+                            <td class="mailbox-date">@item.SendDate.ToShortDateString()</td>
+                        </tr>
+                                                }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
