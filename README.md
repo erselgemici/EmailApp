@@ -32,3 +32,6 @@ Authentication & Authorization: ASP.NET Identity
 
 📸 Ekran Görüntüleri
 
+<img width="950" height="392" alt="SS0" src="https://github.com/user-attachments/assets/cb674cef-bb98-447e-9b34-a39adc854504" />
+<img width="953" height="440" alt="SS1" src="https://github.com/user-attachments/assets/e246424c-d9b5-4e70-86f6-0005600b5ba1" />
+<img width="952" height="439" alt="SS2" src="https://github.com/user-attachments/assets/6aa2a2f7-5ecf-434d-9061-ce707d79fc84" />
